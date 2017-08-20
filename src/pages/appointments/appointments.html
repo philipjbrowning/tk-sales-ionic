@@ -1,0 +1,52 @@
+<!--
+  Generated template for the AppointmentsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Appointments</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onCreate()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (ionInput)="filterAppointments($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let appointment of appointmentsRef$ | async" #slidingItem>
+      <button ion-item (click)="onRead(appointment)">
+        <h2>{{ appointment.contact }}</h2>
+        <p>{{ appointment.date | date : 'EEEE, MMM d, yyyy' }}</p>
+        <p>{{ appointment.location}}</p>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="onArchive(slidingItem, appointment)">
+          <ion-icon name="text"></ion-icon>
+          Archive
+        </button>
+        <button ion-button color="primary" (click)="onDelete(slidingItem, appointment)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="onCreate()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

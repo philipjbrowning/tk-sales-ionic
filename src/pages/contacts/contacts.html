@@ -1,0 +1,45 @@
+<ion-header>
+  
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Contacts</ion-title>
+    <ion-buttons end>
+      <button  *ngIf="!loading" ion-button icon-only (click)="onCreate()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (ionInput)="filterContacts($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let contact of contactsRef$ | async" #slidingItem>
+      <button ion-item (click)="onRead(contact.$key)">
+        <h2>{{ contact.firstName }} {{ contact.lastName }}</h2>
+        <p>{{ contact.location}}</p>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="onArchive(slidingItem, contact)">
+          <ion-icon name="text"></ion-icon>
+          Archive
+        </button>
+        <button ion-button color="primary" (click)="onDelete(slidingItem, contact)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="onCreate()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+  
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Opportunities</ion-title>
+    <ion-buttons end>
+      <button  ion-button icon-only (click)="onCreate()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (ionInput)="filterSessions($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let session of opportunitiesRef$ | async" #slidingItem>
+      <button ion-item (click)="onUpdate(session)">
+        <h2>{{ session.location }}</h2>
+        <h3>{{ session.date | date : 'EEEE, MMM d, yyyy' }}</h3>
+        <p><span>{{ session.people | people }}</span><span *ngIf="session.contacts">, {{ session.contacts | contacts }}</span><span *ngIf="session.appointments">, {{ session.appointments | appointments }}</span></p>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="onArchive(slidingItem, session)">
+          <ion-icon name="text"></ion-icon>
+          Archive
+        </button>
+        <button ion-button color="primary" (click)="onDelete(slidingItem, session)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="addOpportunity()">
+      <ion-icon name="plus"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

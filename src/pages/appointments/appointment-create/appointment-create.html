@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Create Appointment</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Contact</ion-label>
+        <ion-input type="text" placeholder="Please type here" formControlName="contact"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Date</ion-label>
+        <ion-input type="date" placeholder="Please type here" formControlName="date"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Time</ion-label>
+        <ion-input type="time" placeholder="Please type here" formControlName="time"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Location</ion-label>
+        <ion-input type="text" placeholder="Please type here" formControlName="location"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Comments</ion-label>
+        <ion-input type="text" placeholder="Please type here" formControlName="comments"></ion-input>
+      </ion-item>
+      <button ion-button (click)="onSubmit($event)">
+        Create
+      </button>
+      <button ion-button type="button" (click)="form.reset()">
+        Reset
+      </button>
+    </ion-list>
+  </form>
+</ion-content>

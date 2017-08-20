@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Opportunity</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Location</ion-label>
+        <ion-input type="text" placeholder="Enter your location" formControlName="location"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Date</ion-label>
+        <ion-input type="date" formControlName="date"></ion-input>
+      </ion-item>
+      <button ion-item (click)="choosePartner(1)">
+        Choose Partner
+      </button>
+      <button ion-item (click)="choosePartner(2)">
+        Choose Partner
+      </button>
+      <button ion-button (click)="onSubmit($event)">
+        Create
+      </button>
+      <button ion-button (click)="form.reset()">
+        Reset
+      </button>
+    </ion-list>
+  </form>
+</ion-content>
